@@ -1,18 +1,6 @@
 USE imdb;
 
-/* Now that you have imported the data sets, let’s explore some of the tables. 
- To begin with, it is beneficial to know the shape of the tables and whether any column has null values.
- Further in this segment, you will take a look at 'movies' and 'genre' tables.*/
-
-
-
--- Segment 1:
-
-
-
-
 -- Q1. Find the total number of rows in each table of the schema?
--- Type your code below:
 
 SELECT COUNT(movie_id) as Total_Rows FROM director_mapping; 
 SELECT COUNT(movie_id) as Total_Rows FROM genre;
@@ -21,8 +9,8 @@ SELECT COUNT(id) as Total_Rows FROM names;
 SELECT COUNT(movie_id) as Total_Rows FROM ratings; 
 SELECT COUNT(movie_id) as Total_Rows FROM role_mapping;
 
+
 -- Q2. Which columns in the movie table have null values?
--- Type your code below:
 
 SELECT
 SUM(CASE WHEN id IS NULL THEN 1 ELSE 0 END) AS ID_NULL,
@@ -36,8 +24,7 @@ SUM(CASE WHEN languages IS NULL THEN 1 ELSE 0 END) AS Language_NULL,
 SUM(CASE WHEN production_company IS NULL THEN 1 ELSE 0 END) AS production_company_NULL
 FROM movie;
 
-
--- Now as you can see four columns of the movie table has null values. Let's look at the at the movies released each year. 
+ 
 -- Q3. Find the total number of movies released each year? How does the trend look month wise? (Output expected)
 
 /* Output format for the first part:
@@ -45,9 +32,9 @@ FROM movie;
 +---------------+-------------------+
 | Year			|	number_of_movies|
 +-------------------+----------------
-|	2017		|	2134			|
-|	2018		|		.			|
-|	2019		|		.			|
+|	2017		|	2134		|
+|	2018		|		.	|
+|	2019		|		.	|
 +---------------+-------------------+
 
 
@@ -55,11 +42,12 @@ Output format for the second part of the question:
 +---------------+-------------------+
 |	month_num	|	number_of_movies|
 +---------------+----------------
-|	1			|	 134			|
-|	2			|	 231			|
-|	.			|		.			|
+|	1			|	 134	|
+|	2			|	 231	|
+|	.			|		|
 +---------------+-------------------+ */
--- Type your code below:
+
+Ans:
 
 SELECT
 year, COUNT(id) AS number_of_movies
@@ -74,6 +62,7 @@ FROM movie
 GROUP BY MONTH(date_published)
 ORDER By MONTH(date_published);
 
+
 /*The highest number of movies is produced in the month of March.
 So, now that you have understood the month-wise trend of movies, let’s take a look at the other details in the movies table. 
 We know USA and India produces huge number of movies each year. Lets find the number of movies produced by USA or India for the last year.*/
@@ -87,12 +76,12 @@ WHERE ( country LIKE '%INDIA%'
 OR country LIKE '%USA%' )
 AND year = 2019;
 
+
 /* USA and India produced more than a thousand movies(you know the exact number!) in the year 2019.
 Exploring table Genre would be fun!! 
 Let’s find out the different genres in the dataset.*/
 
 -- Q5. Find the unique list of the genres present in the data set?
--- Type your code below:
 
 SELECT DISTINCT(genre) from genre;
 
@@ -102,7 +91,6 @@ Now, wouldn’t you want to know which genre had the highest number of movies pr
 Combining both the movie and genres table can give more interesting insights. */
 
 -- Q6.Which genre had the highest number of movies produced overall?
--- Type your code below:
 
 SELECT
 g.genre, COUNT(m.id) AS num_of_movie
@@ -118,7 +106,7 @@ But wait, it is too early to decide. A movie can belong to two or more genres.
 So, let’s find out the count of movies that belong to only one genre.*/
 
 -- Q7. How many movies belong to only one genre?
--- Type your code below:
+
 
 WITH ct_genre AS
 (
@@ -145,11 +133,12 @@ Now, let's find out the possible duration of RSVP Movies’ next project.*/
 +---------------+-------------------+
 | genre			|	avg_duration	|
 +-------------------+----------------
-|	thriller	|		105			|
-|	.			|		.			|
-|	.			|		.			|
+|	thriller	|		105	|
+|	.	 	|		 	|
+|	.		|	     	 	|
 +---------------+-------------------+ */
--- Type your code below:
+
+Ans: 
 SELECT
 g.genre, ROUND(AVG(m.duration),2) AS Avg_Duration
 FROM movie m
@@ -163,16 +152,15 @@ ORDER BY AVG(m.duration) DESC;
 Lets find where the movies of genre 'thriller' on the basis of number of movies.*/
 
 -- Q9.What is the rank of the ‘thriller’ genre of movies among all the genres in terms of number of movies produced? 
--- (Hint: Use the Rank function)
 
 
 /* Output format:
 +---------------+-------------------+---------------------+
-| genre			|		movie_count	|		genre_rank    |	
+| genre		|    movie_count    |	    genre_rank    |	
 +---------------+-------------------+---------------------+
-|drama			|	2312			|			2		  |
+|drama		|	2312	    |	      2		  |
 +---------------+-------------------+---------------------+*/
--- Type your code below:
+
 
 WITH ct_genre_rank
 AS
@@ -190,24 +178,17 @@ WHERE genre="Thriller";
 /*Thriller movies is in top 3 among all genres in terms of number of movies
  In the previous segment, you analysed the movies and genres tables. 
  In this segment, you will analyse the ratings table as well.
-To start with lets get the min and max values of different columns in the table*/
-
-
-
-
--- Segment 2:
-
-
+To start with lets get the min and max values of different columns in the table
 
 
 -- Q10.  Find the minimum and maximum values in  each column of the ratings table except the movie_id column?
 /* Output format:
 +---------------+-------------------+---------------------+----------------------+-----------------+-----------------+
-| min_avg_rating|	max_avg_rating	|	min_total_votes   |	max_total_votes 	 |min_median_rating|min_median_rating|
+| min_avg_rating|  max_avg_rating   |	min_total_votes   |	max_total_votes  |min_median_rating|min_median_rating|
 +---------------+-------------------+---------------------+----------------------+-----------------+-----------------+
-|		0		|			5		|	       177		  |	   2000	    		 |		0	       |	8			 |
+|	0       |       5	    |	       177        |	   2000	         |		0  |	8	     |
 +---------------+-------------------+---------------------+----------------------+-----------------+-----------------+*/
--- Type your code below:
+
 
 SELECT
 MIN(avg_rating) AS min_avg_rating,
@@ -233,8 +214,7 @@ Now, let’s find out the top 10 movies based on average rating.*/
 |	.			|		.			|			.		  |
 |	.			|		.			|			.		  |
 +---------------+-------------------+---------------------+*/
--- Type your code below:
--- It's ok if RANK() or DENSE_RANK() is used too
+
 
 WITH ct_avg_rating_rank
 AS
@@ -258,13 +238,13 @@ Summarising the ratings table based on the movie counts by median rating can giv
 /* Output format:
 
 +---------------+-------------------+
-| median_rating	|	movie_count		|
+| median_rating	|	movie_count |
 +-------------------+----------------
-|	1			|		105			|
-|	.			|		.			|
-|	.			|		.			|
+|	1	|	105	    |
+|	.	|	.	    |
+|	.	|	. 	    |
 +---------------+-------------------+ */
--- Type your code below:
+
 -- Order by is good to have
 SELECT
 median_rating, COUNT(movie_id) AS movie_count
@@ -282,7 +262,6 @@ Now, let's find out the production house with which RSVP Movies can partner for 
 +------------------+-------------------+---------------------+
 | The Archers	   |		1		   |			1	  	 |
 +------------------+-------------------+---------------------+*/
--- Type your code below:
 
 SELECT
 production_company, COUNT(id) AS movie_count,
@@ -293,20 +272,17 @@ ON m.id = r.movie_id
 WHERE r.avg_rating > 8 AND m.production_company IS NOT NULL
 GROUP BY m.production_company;
 
--- It's ok if RANK() or DENSE_RANK() is used too
--- Answer can be Dream Warrior Pictures or National Theatre Live or both
 
 -- Q14. How many movies released in each genre during March 2017 in the USA had more than 1,000 votes?
 /* Output format:
 
 +---------------+-------------------+
-| genre			|	movie_count		|
+| genre		|	movie_count |
 +-------------------+----------------
-|	thriller	|		105			|
-|	.			|		.			|
-|	.			|		.			|
+|     thriller  |	105	    |
+|	.	|	.           |
+|	.	|	.	    |
 +---------------+-------------------+ */
--- Type your code below:
 
 SELECT
 g.genre, COUNT(m.id) AS movie_count
@@ -323,14 +299,14 @@ ORDER BY COUNT(m.id) DESC;
 -- Q15. Find movies of each genre that start with the word ‘The’ and which have an average rating > 8?
 /* Output format:
 +---------------+-------------------+---------------------+
-| title			|		avg_rating	|		genre	      |
+| title	        |     avg_rating    |	  genre	          |
 +---------------+-------------------+---------------------+
-| Theeran		|		8.3			|		Thriller	  |
-|	.			|		.			|			.		  |
-|	.			|		.			|			.		  |
-|	.			|		.			|			.		  |
+| Theeran	|	8.3         |	 Thriller	  |
+|	.	|	.	    |	   .		  |
+|	.	|	.	    |	   .		  |
+|	.	|	.	    |	   .		  |
 +---------------+-------------------+---------------------+*/
--- Type your code below:
+
 SELECT
 title,
 avg_rating,
@@ -345,7 +321,7 @@ ORDER BY avg_rating DESC;
 
 -- You should also try your hand at median rating and check whether the ‘median rating’ column gives any significant insights.
 -- Q16. Of the movies released between 1 April 2018 and 1 April 2019, how many were given a median rating of 8?
--- Type your code below:
+
 SELECT
 COUNT(id) as movie_released,
 median_rating
@@ -358,7 +334,8 @@ GROUP BY median_rating;
 -- Once again, try to solve the problem given below.
 -- Q17. Do German movies get more votes than Italian movies? 
 -- Hint: Here you have to find the total number of votes for both German and Italian movies.
--- Type your code below:
+
+
 SELECT country, sum(total_votes) AS votes_count
 FROM movie as m
 INNER JOIN ratings as r
@@ -370,13 +347,6 @@ GROUP BY country;
 
 /* Now that you have analysed the movies, genres and ratings tables, let us now analyse another table, the names table. 
 Let’s begin by searching for null values in the tables.*/
-
-
-
-
--- Segment 3:
-
-
 
 -- Q18. Which columns in the names table have null values??
 /*Hint: You can find null values for individual columns or follow below output format
@@ -403,13 +373,13 @@ Let’s find out the top three directors in the top three genres who can be hire
 /* Output format:
 
 +---------------+-------------------+
-| director_name	|	movie_count		|
+| director_name	|   movie_count	    |
 +---------------+-------------------|
-|James Mangold	|		4			|
-|	.			|		.			|
-|	.			|		.			|
+|James Mangold	|     4		    |
+|	.	|	.   	    |
+|	.	|	.	    |
 +---------------+-------------------+ */
--- Type your code below:
+
 WITH top_genre
 AS
 (
@@ -491,8 +461,7 @@ Let’s find out the top three production houses in the world.*/
 |	.				|		.			|			.		  |
 |	.				|		.			|			.		  |
 +-------------------+-------------------+---------------------+*/
--- Type your code below:
-SELECT
+
 production_company,
 SUM(total_votes) AS vote_count,
 DENSE_RANK() OVER(ORDER BY SUM(total_votes) DESC) AS prod_comp_rank
@@ -523,7 +492,7 @@ Let’s find who these actors could be.*/
 |		.		|			.		|	       .		  |	   .	    		 |		.	       |
 |		.		|			.		|	       .		  |	   .	    		 |		.	       |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
--- Type your code below:
+
 WITH top_actor
      AS (SELECT b.NAME
                 AS
@@ -569,7 +538,6 @@ FROM   top_actor;
 |		.		|			.		|	       .		  |	   .	    		 |		.	       |
 |		.		|			.		|	       .		  |	   .	    		 |		.	       |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
--- Type your code below:
 
 WITH top_actor
      AS (SELECT b.NAME
@@ -613,7 +581,6 @@ Now let us divide all the thriller movies in the following categories and find o
 			Rating between 5 and 7: One-time-watch movies
 			Rating < 5: Flop movies
 --------------------------------------------------------------------------------------------*/
--- Type your code below:
 
 SELECT 
     title,
@@ -633,6 +600,7 @@ FROM
 WHERE
     genre = 'thriller';
 
+
 /* Until now, you have analysed various tables of the data set. 
 Now, you will perform some tasks that will give you a broader understanding of the data in this segment.*/
 
@@ -642,14 +610,14 @@ Now, you will perform some tasks that will give you a broader understanding of t
 -- (Note: You need to show the output table in the question.) 
 /* Output format:
 +---------------+-------------------+---------------------+----------------------+
-| genre			|	avg_duration	|running_total_duration|moving_avg_duration  |
+| genre		|   avg_duration    | running_total_duration|moving_avg_duration  |
 +---------------+-------------------+---------------------+----------------------+
-|	comdy		|			145		|	       106.2	  |	   128.42	    	 |
-|		.		|			.		|	       .		  |	   .	    		 |
-|		.		|			.		|	       .		  |	   .	    		 |
-|		.		|			.		|	       .		  |	   .	    		 |
+|	comdy	|	145	    |	       106.2	  |	   128.42	  |
+|	.	|	.	    |	       .          |	   .	    	  |
+|	.	|	.	    |	       .	  |	   .	    	  |
+|	.	|	.	    |	       .	  |	   .	          |
 +---------------+-------------------+---------------------+----------------------+*/
--- Type your code below:
+
 SELECT
 genre,
 ROUND(AVG(duration),2) AS avg_duration,
@@ -670,14 +638,14 @@ GROUP BY genre;
 
 /* Output format:
 +---------------+-------------------+---------------------+----------------------+-----------------+
-| genre			|	year			|	movie_name		  |worldwide_gross_income|movie_rank	   |
+| genre	        |	year	    |	movie_name        |worldwide_gross_income|movie_rank	   |
 +---------------+-------------------+---------------------+----------------------+-----------------+
-|	comedy		|			2017	|	       indian	  |	   $103244842	     |		1	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
+|	comedy	|	  2017      |	       indian	  |	   $103244842	 |    1	           |
+|     .		|	   .	    |	       .          |	   .	         |     .	   |
+|     .		|	   .	    |	       .          |	   .	         |    .	           |
+|     .	        |	   .	    |	       .          |	   .	         |	.          |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
--- Type your code below:
+
 
 -- Top 3 Genres based on most number of movies
 WITH top3_genre
@@ -719,7 +687,7 @@ WHERE movie_rank<=5;
 |	.				|		.			|			.		  |
 |	.				|		.			|			.		  |
 +-------------------+-------------------+---------------------+*/
--- Type your code below:
+
 Select
 production_company,
 COUNT(id) as movie_count,
@@ -746,7 +714,7 @@ LIMIT 2;
 |		.		|			.		|	       .		  |	   .	    		 |		.	       |
 |		.		|			.		|	       .		  |	   .	    		 |		.	       |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
--- Type your code below:
+
 SELECT name as actress_name, SUM(total_votes) AS total_votes, COUNT(rm.movie_id) as movie_id, Round(Sum(avg_rating)/Sum(total_votes),2) AS actress_avg_rating,
 RANK() OVER(ORDER BY COUNT(rm.movie_id) DESC) AS actress_rank
 FROM names n
@@ -759,9 +727,6 @@ ON g.movie_id = r.movie_id
 WHERE category="actress" AND avg_rating>8 AND g.genre="Drama"
 GROUP BY name
 LIMIT 3;
-
-
-
 
 
 
@@ -793,7 +758,6 @@ Format:
 +---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
 
 --------------------------------------------------------------------------------------------*/
--- Type you code below:
 
 WITH ctf_date_summary AS
 (
