@@ -30,21 +30,21 @@ FROM movie;
 /* Output format for the first part:
 
 +---------------+-------------------+
-| Year			|	number_of_movies|
+| Year		|   number_of_movies|
 +-------------------+----------------
-|	2017		|	2134		|
-|	2018		|		.	|
-|	2019		|		.	|
+|	2017	|	2134	    |
+|	2018	|	    .       |
+|	2019	|	.      	    |
 +---------------+-------------------+
 
 
 Output format for the second part of the question:
 +---------------+-------------------+
-|	month_num	|	number_of_movies|
+|month_num	|   number_of_movies|
 +---------------+----------------
-|	1			|	 134	|
-|	2			|	 231	|
-|	.			|		|
+|	1	|	 134	    |
+|	2	|	 231	    |
+|	.	|		    |
 +---------------+-------------------+ */
 
 Ans:
@@ -131,11 +131,11 @@ Now, let's find out the possible duration of RSVP Movies’ next project.*/
 /* Output format:
 
 +---------------+-------------------+
-| genre			|	avg_duration	|
+| genre		|   avg_duration    |
 +-------------------+----------------
-|	thriller	|		105	|
-|	.	 	|		 	|
-|	.		|	     	 	|
+|   thriller	|	105	    |
+|	.	|		    |
+|	.	|	     	    |
 +---------------+-------------------+ */
 
 Ans: 
@@ -207,12 +207,12 @@ Now, let’s find out the top 10 movies based on average rating.*/
 -- Q11. Which are the top 10 movies based on average rating?
 /* Output format:
 +---------------+-------------------+---------------------+
-| title			|		avg_rating	|		movie_rank    |
+| title		|   avg_rating      |	movie_rank        |
 +---------------+-------------------+---------------------+
-| Fan			|		9.6			|			5	  	  |
-|	.			|		.			|			.		  |
-|	.			|		.			|			.		  |
-|	.			|		.			|			.		  |
+| Fan		|	9.6	    |	    5	  	  |
+|	.	|	.	    |	   .		  |
+|	.	|	.	    |	   .		  |
+|	.	|	.	    |	.		  |
 +---------------+-------------------+---------------------+*/
 
 
@@ -258,9 +258,9 @@ Now, let's find out the production house with which RSVP Movies can partner for 
 -- Q13. Which production house has produced the most number of hit movies (average rating > 8)??
 /* Output format:
 +------------------+-------------------+---------------------+
-|production_company|movie_count	       |	prod_company_rank|
+|production_company|movie_count	       |    prod_company_rank|
 +------------------+-------------------+---------------------+
-| The Archers	   |		1		   |			1	  	 |
+| The Archers	   |	1              |     1	  	     |
 +------------------+-------------------+---------------------+*/
 
 SELECT
@@ -351,11 +351,10 @@ Let’s begin by searching for null values in the tables.*/
 -- Q18. Which columns in the names table have null values??
 /*Hint: You can find null values for individual columns or follow below output format
 +---------------+-------------------+---------------------+----------------------+
-| name_nulls	|	height_nulls	|date_of_birth_nulls  |known_for_movies_nulls|
+| name_nulls	|  height_nulls	    |date_of_birth_nulls  |known_for_movies_nulls|
 +---------------+-------------------+---------------------+----------------------+
-|		0		|			123		|	       1234		  |	   12345	    	 |
+|	0	|	123	    |	       1234	  |	   12345	 |
 +---------------+-------------------+---------------------+----------------------+*/
--- Type your code below:
 
 SELECT
 SUM(CASE WHEN name IS NULL THEN 1 ELSE 0 END) AS name_nulls,
@@ -375,7 +374,7 @@ Let’s find out the top three directors in the top three genres who can be hire
 +---------------+-------------------+
 | director_name	|   movie_count	    |
 +---------------+-------------------|
-|James Mangold	|     4		    |
+|James Mangold	|       4	    |
 |	.	|	.   	    |
 |	.	|	.	    |
 +---------------+-------------------+ */
@@ -427,12 +426,12 @@ Now, let’s find out the top two actors.*/
 /* Output format:
 
 +---------------+-------------------+
-| actor_name	|	movie_count		|
+| actor_name	|    movie_count    |
 +-------------------+----------------
-|Christain Bale	|		10			|
-|	.			|		.			|
+|Christain Bale	|      10	    |
+|	.	|      .            |
 +---------------+-------------------+ */
--- Type your code below:
+
 SELECT * from role_mapping;
 SELECT
 n.name AS actor_name,
@@ -455,11 +454,11 @@ Let’s find out the top three production houses in the world.*/
 -- Q21. Which are the top three production houses based on the number of votes received by their movies?
 /* Output format:
 +------------------+--------------------+---------------------+
-|production_company|vote_count			|		prod_comp_rank|
+|production_company|vote_count		|	prod_comp_rank|
 +------------------+--------------------+---------------------+
-| The Archers		|		830			|		1	  		  |
-|	.				|		.			|			.		  |
-|	.				|		.			|			.		  |
+| The Archers	   |	   830		|	1  	      |
+|	.	   |	    .		|	.	      |
+|	.	   |	    .		|	.      	      |
 +-------------------+-------------------+---------------------+*/
 
 production_company,
@@ -485,12 +484,12 @@ Let’s find who these actors could be.*/
 
 /* Output format:
 +---------------+-------------------+---------------------+----------------------+-----------------+
-| actor_name	|	total_votes		|	movie_count		  |	actor_avg_rating 	 |actor_rank	   |
+| actor_name	|   total_votes	    |	movie_count       |actor_avg_rating 	 |actor_rank	   |
 +---------------+-------------------+---------------------+----------------------+-----------------+
-|	Yogi Babu	|			3455	|	       11		  |	   8.42	    		 |		1	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
+|Yogi Babu      |	3455        |	       11	  |	   8.42	    	 |	1	   |
+|	.	|	.	    |	       .	  |	   .	    	 |	.	   |
+|	.	|	.	    |	       .	  |	   .	    	 |	.	   |
+|	.	|	.	    |	       .          |	   .	    	 |	.	   |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
 
 WITH top_actor
@@ -531,12 +530,12 @@ FROM   top_actor;
 -- (Hint: You should use the weighted average based on votes. If the ratings clash, then the total number of votes should act as the tie breaker.)
 /* Output format:
 +---------------+-------------------+---------------------+----------------------+-----------------+
-| actress_name	|	total_votes		|	movie_count		  |	actress_avg_rating 	 |actress_rank	   |
+| actress_name	|total_votes	    |	movie_count	  |actress_avg_rating 	 |actress_rank	   |
 +---------------+-------------------+---------------------+----------------------+-----------------+
-|	Tabu		|			3455	|	       11		  |	   8.42	    		 |		1	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
+|	Tabu	|	3455        |	       11	  |	   8.42	    	 |	1	   |
+|	.	|	.           |	       .	  |	   .	    	 |	.	   |
+|	.	|	.	    |	       .	  |	   .	    	 |	.	   |
+|	.	|	.	    |	       .	  |	   .	    	 |	.	   |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
 
 WITH top_actor
@@ -681,11 +680,11 @@ WHERE movie_rank<=5;
 -- Q27.  Which are the top two production houses that have produced the highest number of hits (median rating >= 8) among multilingual movies?
 /* Output format:
 +-------------------+-------------------+---------------------+
-|production_company |movie_count		|		prod_comp_rank|
+|production_company |movie_count	|	prod_comp_rank|
 +-------------------+-------------------+---------------------+
-| The Archers		|		830			|		1	  		  |
-|	.				|		.			|			.		  |
-|	.				|		.			|			.		  |
+| The Archers	    |		830	|        1            |
+|	.	    |		.	|        .            |
+|	.	    |		.	|	 .            |
 +-------------------+-------------------+---------------------+*/
 
 Select
@@ -708,11 +707,11 @@ LIMIT 2;
 -- Q28. Who are the top 3 actresses based on number of Super Hit movies (average rating >8) in drama genre?
 /* Output format:
 +---------------+-------------------+---------------------+----------------------+-----------------+
-| actress_name	|	total_votes		|	movie_count		  |actress_avg_rating	 |actress_rank	   |
+| actress_name	|total_votes	    |	movie_count	  |actress_avg_rating	 |actress_rank	   |
 +---------------+-------------------+---------------------+----------------------+-----------------+
-|	Laura Dern	|			1016	|	       1		  |	   9.60			     |		1	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
-|		.		|			.		|	       .		  |	   .	    		 |		.	       |
+|Laura Dern	|	1016        |	       1	  |	   9.60	         |	1	   |
+|	.	|	.           |	       .	  |	   .	    	 |	.          |
+|	.	|	.	    |	       .	  |	   .	    	 |	.          |
 +---------------+-------------------+---------------------+----------------------+-----------------+*/
 
 SELECT name as actress_name, SUM(total_votes) AS total_votes, COUNT(rm.movie_id) as movie_id, Round(Sum(avg_rating)/Sum(total_votes),2) AS actress_avg_rating,
@@ -744,17 +743,17 @@ total movie durations
 
 Format:
 +---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
-| director_id	|	director_name	|	number_of_movies  |	avg_inter_movie_days |	avg_rating	| total_votes  | min_rating	| max_rating | total_duration |
+| director_id	| director_name	    |	number_of_movies  | avg_inter_movie_days |avg_rating	| total_votes  | min_rating | max_rating | total_duration |
 +---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
-|nm1777967		|	A.L. Vijay		|			5		  |	       177			 |	   5.65	    |	1754	   |	3.7		|	6.9		 |		613		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
-|	.			|		.			|			.		  |	       .			 |	   .	    |	.		   |	.		|	.		 |		.		  |
+|nm1777967	|	A.L. Vijay  |	      5		  |	       177	 |    5.65	|	1754   |	3.7 |	6.9	 |	613	  |
+|	.	|	.           |	      .		  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
+|	.	|	.      	    |  	      .		  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
+|	.	|	.	    |	      .		  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
+|	.	|	.	    |	      .		  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
+|	.	|	.	    |	      .		  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
+|	.	|	.	    |	      .		  |	       .	 |	  .     |	.      |	.   |	.	 |	.	  |
+|	.	|	.	    |	      . 	  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
+|	.	|	.	    |	      .		  |	       .	 |	  .	|	.      |	.   |	.	 |	.	  |
 +---------------+-------------------+---------------------+----------------------+--------------+--------------+------------+------------+----------------+
 
 --------------------------------------------------------------------------------------------*/
